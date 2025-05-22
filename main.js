@@ -550,40 +550,30 @@ const branch = ({
 // vizualize parameters into HTML table & canvas
 const vizParams = (PAR) => {
     const div = document.createElement("div");
-    let viz = "";
+    let viz = ""
     const tabstyle = "style='border:1px solid grey'";
-    viz +=
-        "<table><tr><td " +
-        tabstyle +
-        ">Summary</td></tr><tr><td " +
-        tabstyle +
-        "><table><tr>";
-    let cnt = 0;
+
     const fmt = (a) => {
-        if (typeof a == "number") {
+        if (typeof a === "number") {
             return a.toFixed(3);
-        } else if (typeof a == "object") {
-            let r = "<table><tr>";
-            for (let k in a) {
-                r += "<td " + tabstyle + ">" + fmt(a[k]) + "</td>";
-            }
-            return r + "</tr></table>";
+        } else if (typeof a === "object") {
+            const cells = Object.values(a)
+                .map((v) => `<td\u0020${tabstyle}>${fmt(v)}</td>`)
+                .join("");
+            return `<table><tr>${cells}</tr></table>`;
         }
     };
+    viz += `<table><tr><td\u0020${tabstyle}>Summary</td></tr><tr><td\u0020${tabstyle}><table><tr>`;
+    let cnt = 0;
 
     for (const k in PAR) {
         if (typeof PAR[k] == "number") {
             cnt += 1;
-            viz +=
-                "<td><td " +
-                tabstyle +
-                ">" +
-                k +
-                "</td><td " +
-                tabstyle +
-                ">" +
-                fmt(PAR[k]) +
-                "</td></td>";
+            viz += `<td><td\u0020${tabstyle}>
+                ${k}
+                </td><td\u0020${tabstyle}>
+                ${fmt(PAR[k])}
+                </td></td>`;
             if (cnt % 4 == 0) {
                 viz += "</tr><tr>";
             }
@@ -594,34 +584,22 @@ const vizParams = (PAR) => {
     cnt = 0;
     for (let k in PAR) {
         if (typeof PAR[k] == "object") {
-            viz +=
-                "<td " +
-                tabstyle +
-                "><table><tr><td colspan='2' " +
-                tabstyle +
-                ">" +
-                k +
-                "</td></tr>";
+            viz += `<td\u0020${tabstyle}>
+                <table><tr><td\u0020colspan='2'\u0020${tabstyle}> 
+                ${k} 
+                </td></tr>`;
 
             for (let i in PAR[k]) {
-                viz +=
-                    "<tr><td " +
-                    tabstyle +
-                    ">" +
-                    i +
-                    "</td><td " +
-                    tabstyle +
-                    ">" +
-                    fmt(PAR[k][i]) +
-                    "</td>";
+                viz += `<tr><td\u0020${tabstyle}> 
+                    ${i} 
+                    </td><td\u0020${tabstyle}> 
+                    ${fmt(PAR[k][i])}
+                    </td>`;
                 if (k.includes("olor")) {
-                    viz +=
-                        "<td " +
-                        tabstyle +
-                        ">" +
-                        "<div style='background-color:" +
-                        hsv(...PAR[k][i]) +
-                        "'>&nbsp&nbsp&nbsp&nbsp&nbsp</div></td>";
+                    viz += `<td\u0020${tabstyle}> 
+                        <div\u0020style='background-color: 
+                        ${hsv(...PAR[k][i])} '>&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+                        </td>`;
                 }
                 viz += "</tr>";
             }
@@ -634,7 +612,7 @@ const vizParams = (PAR) => {
         }
     }
     viz += "</tr></table>";
-    viz += "</td></tr><tr><td align='left' " + tabstyle + "></td></tr></table>";
+    viz += `</td></tr><tr><td\u0020align='left'\u0020${tabstyle}></td></tr></table>`;
     const graphs = document.createElement("div");
     for (let k in PAR) {
         if (typeof PAR[k] == "function") {
