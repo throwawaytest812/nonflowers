@@ -20,9 +20,6 @@ import { generate } from "./generators/generator.js";
 // Constants and global state management
 import { setBackgroundCanvas, setSeed, UI_DISPLAY_MODES } from "./constants.js";
 
-// Export specific functions for use in HTML
-export { rad };
-
 // Initialize everything
 const load = () => {
     // Initialize array polyfills
