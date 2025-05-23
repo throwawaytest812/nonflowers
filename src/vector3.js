@@ -1,4 +1,4 @@
-import { rad } from "../main.js";
+import { rad } from "../utils/math.js";
 
 export class V3 {
     constructor() {

@@ -1,5 +1,5 @@
 import { noise } from "./noise.js";
-import { mapval } from "../main.js";
+import { mapval } from "../utils/math.js";
 
 export class Filter {
     static wispy(x, y, r, g, b, a) {
