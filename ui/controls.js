@@ -43,7 +43,6 @@ export const toggle = (x, disp = UI_DISPLAY_MODES.BLOCK) => {
 
 // Fill HTML background with paper texture
 export const makeBG = () =>
-    new Promise((resolve) => {
         setTimeout(() => {
             const bgcanv = paper({
                 col: PAPER_COLORS.PAPER_COL0,
@@ -53,29 +52,10 @@ export const makeBG = () =>
             const img = bgcanv.toDataURL("image/png");
             document.body.style.backgroundImage = "url(" + img + ")";
             setBackgroundCanvas(bgcanv);
-            resolve(bgcanv);
         }, 10);
-    });
 
 // Reload page with given seed
 export const reloadWSeed = (s) => {
     const u = window.location.href.split("?")[0];
     window.location.href = u + "?seed=" + s;
-};
-
-// Parse URL arguments
-export const parseArgs = (key2f) => {
-    let par = window.location.href.split("?")[1];
-    if (par == undefined) {
-        return;
-    }
-    par = par.split("&");
-    for (let i = 0; i < par.length; i++) {
-        const e = par[i].split("=");
-        try {
-            key2f[e[0]](e[1]);
-        } catch (e) {
-            console.log(e);
-        }
-    }
 };

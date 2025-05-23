@@ -5,14 +5,9 @@
 
 // Core utilities
 import { initializePolyfills } from "./utils/polyfills.js";
-import { initializePRNG, rad } from "./utils/math.js";
-import {
-    parseArgs,
-    makeDownload,
-    toggle,
-    makeBG,
-    reloadWSeed,
-} from "./ui/controls.js";
+import { initializePRNG } from "./utils/math.js";
+import { makeDownload, toggle, makeBG, reloadWSeed } from "./ui/controls.js";
+import { parseArgs } from "./utils/parseUrlArgs.js";
 
 // Generators
 import { generate } from "./generators/generator.js";
@@ -36,10 +31,7 @@ const load = () => {
     console.log(seed);
 
     // Create background texture
-    makeBG().then((bgcanv) => {
-        setBackgroundCanvas(bgcanv);
-    });
-
+    makeBG()
     setTimeout(() => {
         const ctx = generate();
         document.getElementById("canvas-container").appendChild(ctx.canvas);
