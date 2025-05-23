@@ -1,4 +1,3 @@
-import { prng } from "./prng.js";
 export class Noise {
     constructor() {
         this.PERLIN_YWRAPB = 4;

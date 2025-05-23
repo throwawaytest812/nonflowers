@@ -1,7 +1,7 @@
 // Leaf generation functions
 
 import { v3 } from "../src/vector3.js";
-import { polygon, stroke } from "../utils/geometry.js";
+import { polygon, stroke } from "../utils/renderers.js";
 import { hsv, rgba, lerpHue } from "../utils/color.js";
 import { mapval, normRand } from "../utils/math.js";
 import { CTX } from "../constants.js";

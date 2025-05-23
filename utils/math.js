@@ -1,7 +1,6 @@
 // Math utilities and helper functions
 
 import { prng } from "../src/prng.js";
-import { noise } from "../src/noise.js";
 import { MATH_CONSTANTS } from "../constants.js";
 
 const { pow, floor, random: _rand } = Math;
@@ -54,6 +53,3 @@ export const sigmoid = (x, k = 10) => 1 / (1 + Math.exp(-k * (x - 0.5)));
 // Pseudo bean curve
 export const bean = (x) =>
     pow(0.25 - pow(x - 0.5, 2), 0.5) * (2.6 + 2.4 * pow(x, 1.5)) * 0.54;
-
-// Export noise for convenience
-export { noise };

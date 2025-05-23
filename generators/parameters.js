@@ -1,8 +1,13 @@
 // Parameter generation for plants
 
 import { noise } from "../src/noise.js";
-import { randChoice, normRand, randint, mapval } from "../utils/math.js";
-import { sigmoid } from "../utils/math.js";
+import {
+    randChoice,
+    normRand,
+    randint,
+    mapval,
+    sigmoid,
+} from "../utils/math.js";
 
 const { PI, sin, pow, floor, min } = Math;
 

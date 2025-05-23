@@ -2,7 +2,8 @@
 
 import { v3 } from "../src/vector3.js";
 import { noise } from "../src/noise.js";
-import { polygon, tubify, stroke } from "../utils/geometry.js";
+import { polygon, stroke } from "../utils/renderers.js";
+import { tubify } from "../utils/geometry.js";
 import { hsv, rgba, lerpHue } from "../utils/color.js";
 import { mapval, normRand } from "../utils/math.js";
 import { CTX } from "../constants.js";

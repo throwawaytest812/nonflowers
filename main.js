@@ -13,7 +13,7 @@ import { parseArgs } from "./utils/parseUrlArgs.js";
 import { generate } from "./generators/generator.js";
 
 // Constants and global state management
-import { setBackgroundCanvas, setSeed, UI_DISPLAY_MODES } from "./constants.js";
+import { setSeed, UI_DISPLAY_MODES } from "./constants.js";
 
 // Initialize everything
 const load = () => {
