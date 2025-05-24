@@ -1,5 +1,5 @@
 // Color-related utility functions
-import { mapval } from "./math.js";
+import { mapval } from "./index.js";
 const { floor, abs } = Math;
 
 // RGBA to CSS color string

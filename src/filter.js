@@ -1,10 +1,10 @@
-import { noise } from "./noise.js";
-import { mapval } from "../utils/math.js";
+import { noiseInstance } from "./index.js";
+import { mapval } from "../utils/index.js";
 
 export class Filter {
     static wispy(x, y, r, g, b, a) {
-        const n = noise.noise(x * 0.2, y * 0.2),
-            m = noise.noise(x * 0.5, y * 0.5, 2);
+        const n = noiseInstance.noise(x * 0.2, y * 0.2),
+            m = noiseInstance.noise(x * 0.5, y * 0.5, 2);
         return [
             r,
             g * mapval(m, 0, 1, 0.95, 1),
@@ -14,7 +14,7 @@ export class Filter {
     }
 
     static fade(x, y, r, g, b, a) {
-        const n = noise.noise(x * 0.01, y * 0.01);
+        const n = noiseInstance.noise(x * 0.01, y * 0.01);
         return [r, g, b, a * Math.min(Math.max(mapval(n, 0, 1, 0, 1), 0), 1)];
     }
 }

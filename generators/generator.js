@@ -1,15 +1,12 @@
-import Layer from "../src/layer.js";
-import { paper } from "../generators/paper.js";
-import { woody } from "./plants/woody.js";
-import { herbal } from "./plants/herbal.js";
-import { genParams } from "../generators/parameters.js";
-import { vizParams } from "../ui/visualization.js";
+import { Layer } from "../src/index.js";
+import { paper, woody, herbal, genParams } from "../generators/index.js";
+import { vizParams } from "../ui/index.js";
 import {
     setGlobalContext,
     PAPER_COLORS,
     CANVAS_DIMENSIONS,
 } from "../constants.js";
-import { squircle } from "../utils/geometry.js";
+import { squircle } from "../utils/index.js";
 
 // Generate new plant
 export const generate = () => {

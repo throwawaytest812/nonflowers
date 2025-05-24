@@ -1,13 +1,8 @@
 // Plant generation functions (woody and herbal)
 
-import Layer from "../../src/layer.js";
-import { Filter } from "../../src/filter.js";
-import { noise } from "../../src/noise.js";
-import { mapval, normRand } from "../../utils/math.js";
-import { grot } from "../../utils/geometry.js";
-import { leaf } from "../leaf.js";
-import { stem } from "../stem.js";
-import { genParams } from "../parameters.js";
+import { Layer, Filter, noiseInstance } from "../../src/index.js";
+import { mapval, normRand, grot } from "../../utils/index.js";
+import { leaf, stem, genParams } from "../index.js";
 import { CTX, CANVAS_DIMENSIONS } from "../../constants.js";
 
 const { PI, sin, pow, max } = Math;
@@ -37,13 +32,15 @@ export const herbal = ({
             wid: (x) =>
                 PAR.stemWidth *
                 (pow(sin((x * PI) / 2 + PI / 2), 0.5) *
-                    noise.noise(x * 10) *
+                    noiseInstance.noise(x * 10) *
                     0.5 +
                     0.5),
             ben: (x) => [
-                mapval(noise.noise(x * 1, i), 0, 1, -1, 1) * x * PAR.stemBend,
+                mapval(noiseInstance.noise(x * 1, i), 0, 1, -1, 1) *
+                    x *
+                    PAR.stemBend,
                 0,
-                mapval(noise.noise(x * 1, i + PI), 0, 1, -1, 1) *
+                mapval(noiseInstance.noise(x * 1, i + PI), 0, 1, -1, 1) *
                     x *
                     PAR.stemBend,
             ],
@@ -66,9 +63,16 @@ export const herbal = ({
                         ],
                         wid: (x) => 2 * PAR.leafShape(x) * PAR.leafWidth,
                         ben: (x) => [
-                            mapval(noise.noise(x * 1, i), 0, 1, -1, 1) * 5,
+                            mapval(noiseInstance.noise(x * 1, i), 0, 1, -1, 1) *
+                                5,
                             0,
-                            mapval(noise.noise(x * 1, i + PI), 0, 1, -1, 1) * 5,
+                            mapval(
+                                noiseInstance.noise(x * 1, i + PI),
+                                0,
+                                1,
+                                -1,
+                                1
+                            ) * 5,
                         ],
                     });
                 }
@@ -100,9 +104,11 @@ export const herbal = ({
                 col: { min: [70, 0.2, 0.9, 1], max: [70, 0.2, 0.9, 1] },
                 wid: () => 2,
                 ben: (x) => [
-                    mapval(noise.noise(x * 1, j), 0, 1, -1, 1) * x * 10,
+                    mapval(noiseInstance.noise(x * 1, j), 0, 1, -1, 1) * x * 10,
                     0,
-                    mapval(noise.noise(x * 1, j + PI), 0, 1, -1, 1) * x * 10,
+                    mapval(noiseInstance.noise(x * 1, j + PI), 0, 1, -1, 1) *
+                        x *
+                        10,
                 ],
             });
             const op = Math.random();
@@ -162,9 +168,10 @@ export const herbal = ({
                 wid: (x) => 2 * PAR.leafShape(x) * PAR.leafWidth,
                 vei: PAR.leafType,
                 ben: (x) => [
-                    mapval(noise.noise(x * 1, i), 0, 1, -1, 1) * 10,
+                    mapval(noiseInstance.noise(x * 1, i), 0, 1, -1, 1) * 10,
                     0,
-                    mapval(noise.noise(x * 1, i + PI), 0, 1, -1, 1) * 10,
+                    mapval(noiseInstance.noise(x * 1, i + PI), 0, 1, -1, 1) *
+                        10,
                 ],
             });
         }

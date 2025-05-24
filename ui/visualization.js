@@ -1,7 +1,7 @@
 // Parameter visualization functions
 
-import Layer from "../src/layer.js";
-import { hsv } from "../utils/color.js";
+import { Layer } from "../src/index.js";
+import { hsv } from "../utils/index.js";
 import { TAB_STYLE } from "../constants.js";
 
 // Visualize parameters into HTML table & canvas

@@ -1,13 +1,13 @@
 // Parameter generation for plants
 
-import { noise } from "../src/noise.js";
+import { noiseInstance } from "../src/index.js";
 import {
     randChoice,
     normRand,
     randint,
     mapval,
     sigmoid,
-} from "../utils/math.js";
+} from "../utils/index.js";
 
 const { PI, sin, pow, floor, min } = Math;
 
@@ -29,7 +29,7 @@ export const genParams = () => {
     const flowerShapeNoiseSeed = Math.random() * PI;
     const flowerJaggedness = normRand(0.5, 8);
     PAR.flowerShape = (x) =>
-        noise.noise(x * flowerJaggedness, flowerShapeNoiseSeed) *
+        noiseInstance.noise(x * flowerJaggedness, flowerShapeNoiseSeed) *
         flowerShapeMask(x);
 
     const leafShapeNoiseSeed = Math.random() * PI;
@@ -37,7 +37,7 @@ export const genParams = () => {
     const leafPointyness = normRand(0.5, 1.5);
     PAR.leafShape = randChoice([
         (x) =>
-            noise.noise(x * leafJaggedness, leafShapeNoiseSeed) *
+            noiseInstance.noise(x * leafJaggedness, leafShapeNoiseSeed) *
             leafShapeMask(x),
         (x) => pow(sin(PI * x), leafPointyness),
     ]);
@@ -80,7 +80,7 @@ export const genParams = () => {
         (x, op) =>
             x < 0.1
                 ? 2 + op * curveCoeff2[1]
-                : noise.noise(x * 10, curveCoeff2[0]),
+                : noiseInstance.noise(x * 10, curveCoeff2[0]),
         (x, op) =>
             x < curveCoeff4[0]
                 ? 0
@@ -89,7 +89,7 @@ export const genParams = () => {
 
     PAR.flowerColorCurve = randChoice([
         (x) => sigmoid(x + curveCoeff0[0], curveCoeff0[1]),
-        //(x)=>(noise.noise(x*curveCoeff1[1],curveCoeff1[0]))
+        //(x)=>(noiseInstance.noise(x*curveCoeff1[1],curveCoeff1[0]))
     ]);
 
     PAR.leafLength = normRand(30, 100);

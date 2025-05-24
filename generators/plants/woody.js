@@ -1,14 +1,8 @@
 // Plant generation functions (woody and herbal)
 
-import Layer from "../../src/layer.js";
-import { Filter } from "../../src/filter.js";
-import { noise } from "../../src/noise.js";
-import { mapval, normRand } from "../../utils/math.js";
-import { grot } from "../../utils/geometry.js";
-import { branch } from "../branch.js";
-import { leaf } from "../leaf.js";
-import { stem } from "../stem.js";
-import { genParams } from "../parameters.js";
+import { Layer, Filter, noiseInstance } from "../../src/index.js";
+import { mapval, normRand, grot } from "../../utils/index.js";
+import { branch, leaf, stem, genParams } from "../index.js";
 import { CTX, CANVAS_DIMENSIONS } from "../../constants.js";
 
 const { PI, sin } = Math;
@@ -54,9 +48,16 @@ export const woody = ({
                         ],
                         wid: (x) => PAR.leafShape(x) * PAR.leafWidth,
                         ben: (x) => [
-                            mapval(noise.noise(x * 1, i), 0, 1, -1, 1) * 5,
+                            mapval(noiseInstance.noise(x * 1, i), 0, 1, -1, 1) *
+                                5,
                             0,
-                            mapval(noise.noise(x * 1, i + PI), 0, 1, -1, 1) * 5,
+                            mapval(
+                                noiseInstance.noise(x * 1, i + PI),
+                                0,
+                                1,
+                                -1,
+                                1
+                            ) * 5,
                         ],
                     });
                 }

@@ -1,6 +1,6 @@
 // Geometry and shape utility functions
 
-import { v3 } from "../src/vector3.js";
+import { v3Instance } from "../src/index.js";
 
 const { PI, sin, cos, pow, atan2 } = Math;
 
@@ -58,8 +58,9 @@ export const bezmh = (P, w = 1) => {
 
 // Get rotation at given index of a poly-line
 export const grot = (P, ind) => {
-    const d = v3.subtract(P[ind + 1], P[ind]);
-    return v3.toeuler(d);
+    const next = ind + 1 < P.length ? ind + 1 : ind - 1;
+    const d = v3Instance.subtract(P[next], P[ind]);
+    return v3Instance.toeuler(d);
 };
 
 // Generate 2D tube shape from list of points

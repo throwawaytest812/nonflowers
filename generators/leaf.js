@@ -1,9 +1,15 @@
 // Leaf generation functions
 
-import { v3 } from "../src/vector3.js";
-import { polygon, stroke } from "../utils/renderers.js";
-import { hsv, rgba, lerpHue } from "../utils/color.js";
-import { mapval, normRand } from "../utils/math.js";
+import { v3Instance } from "../src/index.js";
+import {
+    polygon,
+    stroke,
+    hsv,
+    rgba,
+    lerpHue,
+    mapval,
+    normRand,
+} from "../utils/index.js";
 import { CTX } from "../constants.js";
 
 const { PI, sin, abs } = Math;
@@ -23,29 +29,29 @@ export const leaf = ({
     cof = (x) => x,
     ben = (x) => [normRand(-10, 10), 0, normRand(-5, 5)],
 } = {}) => {
-    let disp = v3.zero;
-    let crot = v3.zero;
+    let disp = v3Instance.zero;
+    let crot = v3Instance.zero;
     const P = [disp],
         ROT = [crot],
         L = [disp],
         R = [disp];
 
-    const orient = (v) => v3.roteuler(v, rot);
+    const orient = (v) => v3Instance.roteuler(v, rot);
 
     for (let i = 0; i < seg; i++) {
         const p = i / (seg - 1);
-        crot = v3.add(crot, v3.scale(ben(p), 1 / seg));
-        disp = v3.add(disp, orient(v3.roteuler([0, 0, len / seg], crot)));
+        crot = v3Instance.add(crot, v3Instance.scale(ben(p), 1 / seg));
+        disp = v3Instance.add(disp, orient(v3Instance.roteuler([0, 0, len / seg], crot)));
         const w = wid(p);
-        const l = v3.add(disp, orient(v3.roteuler([-w, 0, 0], crot)));
-        const r = v3.add(disp, orient(v3.roteuler([w, 0, 0], crot)));
+        const l = v3Instance.add(disp, orient(v3Instance.roteuler([-w, 0, 0], crot)));
+        const r = v3Instance.add(disp, orient(v3Instance.roteuler([w, 0, 0], crot)));
 
         if (i > 0) {
-            const v0 = v3.subtract(disp, L[-1]);
-            const v1 = v3.subtract(l, disp);
-            const v2 = v3.cross(v0, v1);
+            const v0 = v3Instance.subtract(disp, L[-1]);
+            const v1 = v3Instance.subtract(l, disp);
+            const v2 = v3Instance.cross(v0, v1);
             let lt = !flo
-                ? mapval(abs(v3.ang(v2, [0, -1, 0])), 0, PI, 1, 0)
+                ? mapval(abs(v3Instance.ang(v2, [0, -1, 0])), 0, PI, 1, 0)
                 : p * normRand(0.95, 1);
             lt = cof(lt) || 0;
 
@@ -84,11 +90,11 @@ export const leaf = ({
             for (let j = 0; j < vei[1]; j++) {
                 const p = j / vei[1];
 
-                const p0 = v3.lerp(L[i - 1], P[i - 1], p);
-                const p1 = v3.lerp(L[i], P[i], p);
+                const p0 = v3Instance.lerp(L[i - 1], P[i - 1], p);
+                const p1 = v3Instance.lerp(L[i], P[i], p);
 
-                const q0 = v3.lerp(R[i - 1], P[i - 1], p);
-                const q1 = v3.lerp(R[i], P[i], p);
+                const q0 = v3Instance.lerp(R[i - 1], P[i - 1], p);
+                const q1 = v3Instance.lerp(R[i], P[i], p);
                 polygon({
                     ctx,
                     pts: [p0, p1],

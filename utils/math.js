@@ -1,6 +1,6 @@
 // Math utilities and helper functions
 
-import { prng } from "../src/prng.js";
+import { prngInstance } from "../src/index.js";
 import { MATH_CONSTANTS } from "../constants.js";
 
 const { pow, floor, random: _rand } = Math;
@@ -8,8 +8,8 @@ const { pow, floor, random: _rand } = Math;
 // Override Math.random with seedable PRNG
 export const initializePRNG = () => {
     Math.oldRandom = _rand;
-    Math.random = () => prng.next();
-    Math.seed = (x) => prng.seed(x);
+    Math.random = () => prngInstance.next();
+    Math.seed = (x) => prngInstance.seed(x);
 };
 
 // Angle conversions

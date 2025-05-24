@@ -1,9 +1,8 @@
 // Branch generation functions
 
-import { noise } from "../src/noise.js";
-import { grot } from "../utils/geometry.js";
-import { normRand, mapval } from "../utils/math.js";
-import { stem } from "./stem.js";
+import { noiseInstance } from "../src/index.js";
+import { grot, normRand, mapval } from "../utils/index.js";
+import { stem } from "./index.js";
 import { CTX } from "../constants.js";
 
 const { PI, floor, abs } = Math;
@@ -45,7 +44,10 @@ export const branch = ({
         return m < 1
             ? wid * (3 + 5 * (1 - x))
             : wid *
-                  (2 + 7 * (1 - x) * mapval(noise.noise(x * 10), 0, 1, 0.5, 1));
+                  (2 +
+                      7 *
+                          (1 - x) *
+                          mapval(noiseInstance.noise(x * 10), 0, 1, 0.5, 1));
     };
 
     const bfun = (x) => {

@@ -4,13 +4,15 @@
 // Import statements organized by category
 
 // Core utilities
-import { initializePolyfills } from "./utils/polyfills.js";
-import { initializePRNG } from "./utils/math.js";
-import { makeDownload, toggle, makeBG, reloadWSeed } from "./ui/controls.js";
-import { parseArgs } from "./utils/parseUrlArgs.js";
+import {
+    initializePolyfills,
+    initializePRNG,
+    parseArgs,
+} from "./utils/index.js";
+import { makeDownload, toggle, makeBG, reloadWSeed } from "./ui/index.js";
 
 // Generators
-import { generate } from "./generators/generator.js";
+import { generate } from "./generators/index.js";
 
 // Constants and global state management
 import { setSeed, UI_DISPLAY_MODES } from "./constants.js";
@@ -31,7 +33,7 @@ const load = () => {
     console.log(seed);
 
     // Create background texture
-    makeBG()
+    makeBG();
     setTimeout(() => {
         const ctx = generate();
         document.getElementById("canvas-container").appendChild(ctx.canvas);

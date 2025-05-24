@@ -1,7 +1,7 @@
 // UI control functions
 
-import Layer from "../src/layer.js";
-import { paper } from "../generators/paper.js";
+import { Layer } from "../src/index.js";
+import { paper } from "../generators/index.js";
 import {
     BGCANV,
     CTX,
@@ -43,16 +43,16 @@ export const toggle = (x, disp = UI_DISPLAY_MODES.BLOCK) => {
 
 // Fill HTML background with paper texture
 export const makeBG = () =>
-        setTimeout(() => {
-            const bgcanv = paper({
-                col: PAPER_COLORS.PAPER_COL0,
-                tex: 10,
-                spr: 0,
-            });
-            const img = bgcanv.toDataURL("image/png");
-            document.body.style.backgroundImage = "url(" + img + ")";
-            setBackgroundCanvas(bgcanv);
-        }, 10);
+    setTimeout(() => {
+        const bgcanv = paper({
+            col: PAPER_COLORS.PAPER_COL0,
+            tex: 10,
+            spr: 0,
+        });
+        const img = bgcanv.toDataURL("image/png");
+        document.body.style.backgroundImage = "url(" + img + ")";
+        setBackgroundCanvas(bgcanv);
+    }, 10);
 
 // Reload page with given seed
 export const reloadWSeed = (s) => {

@@ -1,7 +1,7 @@
 // Paper texture generation
 
-import { noise } from "../src/noise.js";
-import { rgba } from "../utils/color.js";
+import { noiseInstance } from "../src/index.js";
+import { rgba } from "../utils/index.js";
 import { PAPER_COLORS, CANVAS_DIMENSIONS } from "../constants.js";
 
 // Generate paper texture
@@ -18,13 +18,15 @@ export const paper = ({
 
     for (let i = 0; i < reso / 2 + 1; i++) {
         for (let j = 0; j < reso / 2 + 1; j++) {
-            let c = 255 - noise.noise(i * 0.1, j * 0.1) * tex * 0.5;
+            let c = 255 - noiseInstance.noise(i * 0.1, j * 0.1) * tex * 0.5;
             c -= Math.random() * tex;
             let r = c * col[0],
                 g = c * col[1],
                 b = c * col[2];
             if (
-                noise.noise(i * 0.04, j * 0.04, 2) * Math.random() * spr >
+                noiseInstance.noise(i * 0.04, j * 0.04, 2) *
+                    Math.random() *
+                    spr >
                     0.7 ||
                 Math.random() < 0.005 * spr
             ) {
