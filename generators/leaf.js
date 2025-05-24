@@ -41,10 +41,19 @@ export const leaf = ({
     for (let i = 0; i < seg; i++) {
         const p = i / (seg - 1);
         crot = v3Instance.add(crot, v3Instance.scale(ben(p), 1 / seg));
-        disp = v3Instance.add(disp, orient(v3Instance.roteuler([0, 0, len / seg], crot)));
+        disp = v3Instance.add(
+            disp,
+            orient(v3Instance.roteuler([0, 0, len / seg], crot))
+        );
         const w = wid(p);
-        const l = v3Instance.add(disp, orient(v3Instance.roteuler([-w, 0, 0], crot)));
-        const r = v3Instance.add(disp, orient(v3Instance.roteuler([w, 0, 0], crot)));
+        const l = v3Instance.add(
+            disp,
+            orient(v3Instance.roteuler([-w, 0, 0], crot))
+        );
+        const r = v3Instance.add(
+            disp,
+            orient(v3Instance.roteuler([w, 0, 0], crot))
+        );
 
         if (i > 0) {
             const v0 = v3Instance.subtract(disp, L[-1]);
